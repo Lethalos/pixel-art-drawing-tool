@@ -29,11 +29,17 @@ body {
   justify-content: center;
 }
 
+/* Canvas */
 .container {
+  max-width: 1100px;
+  margin: 0 auto;
   padding: 2rem;
+  border-left: 3px solid #1e1e26;
+  border-right: 3px solid #1e1e26;
 
   display: flex;
   justify-content: space-between;
+  gap: 2rem;
 }
 
 .settings {
@@ -47,10 +53,10 @@ body {
 }
 
 .canvas {
+  flex-shrink: 0;
   width: 500px;
   height: 500px;
+
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
 }
