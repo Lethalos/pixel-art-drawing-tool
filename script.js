@@ -4,6 +4,7 @@ const clearBtn = document.querySelector(".clear-btn");
 const clickMode = document.querySelector(".click-mode");
 const defaultBtn = document.querySelector(".default-btn");
 const sizeSlider = document.querySelector(".size-slider");
+const sliderText = document.querySelector(".slider-text");
 
 console.log(sizeSlider);
 
@@ -15,7 +16,6 @@ let currentMode = DEFAULT_MODE;
 
 sizeSlider.min = 1;
 sizeSlider.max = 64;
-sizeSlider.value = DEFAULT_SIZE;
 sizeSlider.onchange = () => {
   drawCanvas(sizeSlider.value, DEFAULT_COLOR, currentMode);
 };
@@ -30,7 +30,10 @@ const deleteSquares = () => {
 const drawCanvas = (size, color, mode) => {
   deleteSquares();
   currentSize = size;
+  sizeSlider.value = size;
+  sliderText.innerHTML = `${size} x ${size}`;
   currentMode = mode;
+
   let numOfPixel = size * size;
   let squareWidth = 500 / size;
 

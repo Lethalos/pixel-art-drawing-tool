@@ -52,6 +52,49 @@ body {
   padding: 1rem 2rem;
 }
 
+.slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.slider .slider-text {
+  align-self: center;
+  color: #bf3939;
+}
+
+.slider .size-slider {
+  appearance: none;
+  height: 25px;
+  background-color: #d99484;
+  outline: none;
+  border-radius: 1rem;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.slider .size-slider:hover {
+  opacity: 1;
+}
+
+.slider .size-slider::-webkit-slider-thumb {
+  appearance: none;
+  border: 1px solid black;
+  height: 25px;
+  width: 15px;
+  border-radius: 3px;
+  background: #bf3939;
+  cursor: pointer;
+  box-shadow: 1px 1px 1px black, 0px 0px 1px black;
+}
+
+.slider .size-slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  background: #04aa6d;
+  cursor: pointer;
+}
+
 .canvas {
   flex-shrink: 0;
   width: 500px;
