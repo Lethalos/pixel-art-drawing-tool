@@ -40,15 +40,16 @@ const drawCanvas = (size, color, mode) => {
   for (let i = 0; i < numOfPixel; i++) {
     let square = document.createElement("div");
     square.className = "pixel";
-    square.style.width = squareWidth + "px";
-    square.style.height = squareWidth + "px";
     square.style.backgroundColor = color;
-    square.style.border = "1px solid black";
+    square.style.border = "1px solid black"; 
     square.addEventListener(mode, () => {
       square.style.backgroundColor = "black";
     });
     canvas.appendChild(square);
   }
+
+  canvas.style.display = "grid"
+  canvas.style.gridTemplateColumns = `repeat(${size}, ${squareWidth}px)`
 };
 
 drawCanvas(DEFAULT_SIZE, DEFAULT_COLOR, DEFAULT_MODE);
