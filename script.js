@@ -1,5 +1,4 @@
 const canvas = document.querySelector(".canvas");
-const sizeBtn = document.querySelector(".size-btn");
 const clearBtn = document.querySelector(".clear-btn");
 const clickMode = document.querySelector(".click-mode");
 const defaultBtn = document.querySelector(".default-btn");
@@ -41,37 +40,18 @@ const drawCanvas = (size, color, mode) => {
     let square = document.createElement("div");
     square.className = "pixel";
     square.style.backgroundColor = color;
-    square.style.border = "1px solid black"; 
+    square.style.border = "1px solid black";
     square.addEventListener(mode, () => {
       square.style.backgroundColor = "black";
     });
     canvas.appendChild(square);
   }
 
-  canvas.style.display = "grid"
-  canvas.style.gridTemplateColumns = `repeat(${size}, ${squareWidth}px)`
+  canvas.style.display = "grid";
+  canvas.style.gridTemplateColumns = `repeat(${size}, ${squareWidth}px)`;
 };
 
 drawCanvas(DEFAULT_SIZE, DEFAULT_COLOR, DEFAULT_MODE);
-
-sizeBtn.addEventListener("click", () => {
-  let size = prompt("Enter a canvas size (max 64): ");
-
-  if (size > 0 && size > 64) {
-    alert("Please enter a size 64 or below");
-    return;
-  }
-
-  if (size == null) {
-    size = DEFAULT_SIZE;
-  }
-
-  drawCanvas(size, DEFAULT_COLOR, currentMode);
-});
-
-clearBtn.addEventListener("click", () => {
-  drawCanvas(currentSize, DEFAULT_COLOR, currentMode);
-});
 
 clickMode.addEventListener("click", () => {
   if (currentMode == "click") {
@@ -79,6 +59,10 @@ clickMode.addEventListener("click", () => {
   }
 
   drawCanvas(currentSize, DEFAULT_COLOR, "click");
+});
+
+clearBtn.addEventListener("click", () => {
+  drawCanvas(currentSize, DEFAULT_COLOR, currentMode);
 });
 
 defaultBtn.addEventListener("click", () => {

@@ -49,7 +49,50 @@ body {
 }
 
 .settings button {
-  padding: 1rem 2rem;
+  background-color: #d99484;
+  color: #fff;
+  border: 2px solid #1e1e26;
+  font-size: 1.5rem;
+  border-radius: 8px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  padding: 0 2rem;
+  position: relative;
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+}
+
+.settings button:after {
+  background-color: #1e1e26;
+  border-radius: 8px;
+  content: "";
+  display: block;
+  height: 60px;
+  left: 0;
+  width: 100%;
+  position: absolute;
+  top: -2px;
+  transform: translate(8px, 8px);
+  transition: transform 0.2s ease-out;
+  z-index: -1;
+}
+
+.settings button:hover:after {
+  transform: translate(0, 0);
+}
+
+.settings button:active {
+  background-color: #fff;
+  color: #d99484;
+  outline: 0;
+}
+
+.settings button:hover {
+  outline: 0;
 }
 
 .slider {
@@ -60,7 +103,8 @@ body {
 
 .slider .slider-text {
   align-self: center;
-  color: #bf3939;
+  font-size: 2rem;
+  color: #f26a4b;
 }
 
 .slider .size-slider {
@@ -84,18 +128,18 @@ body {
   height: 25px;
   border-radius: 3px;
   background: #bf3939;
-  cursor: pointer;
   box-shadow: 1px 1px 1px black, 0px 0px 1px black;
+  cursor: pointer;
 }
 
 .slider .size-slider::-moz-range-thumb {
-  appearance: none;
   border: 1px solid black;
   width: 15px;
   height: 25px;
+  border-radius: 3px;
   background: #bf3939;
-  cursor: pointer;
   box-shadow: 1px 1px 1px black, 0px 0px 1px black;
+  cursor: pointer;
 }
 
 .canvas {
