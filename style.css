@@ -1,6 +1,6 @@
 /*
 Colors
-#c2c2c2;
+#e7dbd8;
 #BF3939
 #D99484
 #F26A4B not used
@@ -18,13 +18,13 @@ Colors
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #c2c2c2;
+  background-color: #e7dbd8;
 }
 
 /* Navbar */
 .navbar {
   background-color: #1e1e26;
-  color: #c2c2c2;
+  color: #fff;
   padding: 1rem 0;
   font-size: 1.5rem;
 
@@ -157,7 +157,10 @@ body {
 .slider .slider-text {
   align-self: center;
   font-size: 2rem;
-  color: #bf3939;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: #d99484;
 }
 
 .slider .size-slider {
@@ -195,12 +198,16 @@ body {
   cursor: pointer;
 }
 
+.canvas-section .mode-text-bg {
+  background-color: #1e1e26;
+  padding: 1rem 0;
+}
+
 .canvas-section .mode-text {
-  color: #bf3939;
+  color: #fff;
   font-size: 2rem;
   text-align: center;
   font-weight: bold;
-  margin-bottom: 1rem;
 }
 
 .mode-text-anim {
