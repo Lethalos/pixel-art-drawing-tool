@@ -13,6 +13,11 @@ canvas.style.width = `${CANVAS_PIXEL}px`;
 
 const sizeSlider = document.querySelector(".size-slider");
 const sliderText = document.querySelector(".slider-text");
+sizeSlider.min = 1;
+sizeSlider.max = 64;
+sizeSlider.addEventListener("change", () => {
+  drawCanvas(sizeSlider.value);
+});
 
 const randomColors = document.querySelector(".random-colors");
 const dragMode = document.querySelector(".drag-mode");
@@ -20,11 +25,8 @@ const clickMode = document.querySelector(".click-mode");
 const clearBtn = document.querySelector(".clear-btn");
 const defaultBtn = document.querySelector(".default-btn");
 
-sizeSlider.min = 1;
-sizeSlider.max = 64;
-sizeSlider.addEventListener("change", () => {
-  drawCanvas(sizeSlider.value);
-});
+const modeText = document.querySelector(".mode-text");
+modeText.innerText = "Drag Mode active";
 
 const deletePixels = () => {
   const pixels = document.querySelectorAll(".pixel");
@@ -86,17 +88,19 @@ randomColors.addEventListener("click", () => {
 });
 
 dragMode.addEventListener("click", () => {
-  if (currentMode == "mouseenter") {
+  if (currentMode == DEFAULT_MODE) {
     return;
   }
 
   const pixels = document.querySelectorAll(".pixel");
   pixels.forEach((pixel) => {
     pixel.removeEventListener(currentMode, setPixelColor);
-    pixel.addEventListener("mouseenter", setPixelColor);
+    pixel.addEventListener(DEFAULT_MODE, setPixelColor);
   });
 
-  currentMode = "mouseenter";
+  currentMode = DEFAULT_MODE;
+  modeText.innerText = "Drag Mode active";
+  playModeTextAnim();
 });
 
 clickMode.addEventListener("click", () => {
@@ -111,6 +115,8 @@ clickMode.addEventListener("click", () => {
   });
 
   currentMode = "click";
+  modeText.innerText = "Click Mode active";
+  playModeTextAnim();
 });
 
 clearBtn.addEventListener("click", () => {
@@ -118,6 +124,20 @@ clearBtn.addEventListener("click", () => {
 });
 
 defaultBtn.addEventListener("click", () => {
+  if (currentSize == DEFAULT_SIZE && currentMode == DEFAULT_MODE) {
+    return;
+  }
+
   currentMode = DEFAULT_MODE;
+  modeText.innerText = "Drag Mode active";
+  playModeTextAnim();
+
   drawCanvas(DEFAULT_SIZE);
 });
+
+const playModeTextAnim = () => {
+  modeText.classList.add("mode-text-anim");
+  setTimeout(() => {
+    modeText.classList.remove("mode-text-anim");
+  }, 500);
+};
