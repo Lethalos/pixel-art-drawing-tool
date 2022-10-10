@@ -15,21 +15,20 @@ const sizeSlider = document.querySelector(".size-slider");
 const sliderText = document.querySelector(".slider-text");
 
 const randomColors = document.querySelector(".random-colors");
-const clearBtn = document.querySelector(".clear-btn");
+const dragMode = document.querySelector(".drag-mode");
 const clickMode = document.querySelector(".click-mode");
+const clearBtn = document.querySelector(".clear-btn");
 const defaultBtn = document.querySelector(".default-btn");
 
 sizeSlider.min = 1;
 sizeSlider.max = 64;
-sizeSlider.onchange = () => {
-  drawCanvas(sizeSlider.value, currentMode);
-};
+sizeSlider.addEventListener("change", () => {
+  drawCanvas(sizeSlider.value);
+});
 
 const deletePixels = () => {
   const pixels = document.querySelectorAll(".pixel");
-  for (let i = 0; i < pixels.length; i++) {
-    pixels[i].remove();
-  }
+  pixels.forEach((pixel) => pixel.remove());
 };
 
 const getRandomColor = () => {
@@ -40,12 +39,20 @@ const getRandomColor = () => {
   return `rgb(${c1}, ${c2}, ${c3})`;
 };
 
-const drawCanvas = (size, mode) => {
+const setPixelColor = (event) => {
+  if (randomColorMode == true) {
+    currentPenColor = getRandomColor();
+  } else {
+    currentPenColor = DEFAULT_PEN_COLOR;
+  }
+  event.target.style.backgroundColor = currentPenColor;
+};
+
+const drawCanvas = (size) => {
   deletePixels();
   currentSize = size;
   sizeSlider.value = size;
   sliderText.innerHTML = `${size} x ${size}`;
-  currentMode = mode;
 
   let numOfPixel = size * size;
   let pixelWidth = CANVAS_PIXEL / size;
@@ -55,14 +62,7 @@ const drawCanvas = (size, mode) => {
     pixel.className = "pixel";
     pixel.style.backgroundColor = "white";
     pixel.style.border = "1px solid black";
-    pixel.addEventListener(mode, () => {
-      if (randomColorMode == true) {
-        currentPenColor = getRandomColor();
-      } else {
-        currentPenColor = DEFAULT_PEN_COLOR;
-      }
-      pixel.style.backgroundColor = currentPenColor;
-    });
+    pixel.addEventListener(currentMode, setPixelColor);
     canvas.appendChild(pixel);
   }
 
@@ -70,7 +70,7 @@ const drawCanvas = (size, mode) => {
   canvas.style.gridTemplateColumns = `repeat(${size}, ${pixelWidth}px)`;
 };
 
-drawCanvas(DEFAULT_SIZE, DEFAULT_MODE);
+drawCanvas(DEFAULT_SIZE);
 
 randomColors.addEventListener("click", () => {
   randomColorMode = !randomColorMode;
@@ -85,18 +85,39 @@ randomColors.addEventListener("click", () => {
   }
 });
 
+dragMode.addEventListener("click", () => {
+  if (currentMode == "mouseenter") {
+    return;
+  }
+
+  const pixels = document.querySelectorAll(".pixel");
+  pixels.forEach((pixel) => {
+    pixel.removeEventListener(currentMode, setPixelColor);
+    pixel.addEventListener("mouseenter", setPixelColor);
+  });
+
+  currentMode = "mouseenter";
+});
+
 clickMode.addEventListener("click", () => {
   if (currentMode == "click") {
     return;
   }
 
-  drawCanvas(currentSize, "click");
+  const pixels = document.querySelectorAll(".pixel");
+  pixels.forEach((pixel) => {
+    pixel.removeEventListener(currentMode, setPixelColor);
+    pixel.addEventListener("click", setPixelColor);
+  });
+
+  currentMode = "click";
 });
 
 clearBtn.addEventListener("click", () => {
-  drawCanvas(currentSize, currentMode);
+  drawCanvas(currentSize);
 });
 
 defaultBtn.addEventListener("click", () => {
-  drawCanvas(DEFAULT_SIZE, DEFAULT_MODE);
+  currentMode = DEFAULT_MODE;
+  drawCanvas(DEFAULT_SIZE);
 });
