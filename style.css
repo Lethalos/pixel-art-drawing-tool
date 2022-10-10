@@ -3,9 +3,12 @@ Colors
 #c2c2c2;
 #BF3939
 #D99484
-#F26A4B
+#F26A4B not used
 #1E1E26
 */
+:root {
+  --randomColors-zIndex: -1;
+}
 
 * {
   margin: 0;
@@ -58,7 +61,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 4rem;
   padding: 0 2rem;
   position: relative;
   cursor: pointer;
@@ -71,7 +74,7 @@ body {
   border-radius: 8px;
   content: "";
   display: block;
-  height: 60px;
+  height: 4rem;
   left: 0;
   width: 100%;
   position: absolute;
@@ -95,6 +98,56 @@ body {
   outline: 0;
 }
 
+.settings .random-colors .text {
+  z-index: 1;
+  font-weight: bold;
+}
+
+.settings .random-colors:active {
+  background-color: #1e1e26;
+  color: #1e1e26;
+}
+
+.settings .random-colors:before {
+  content: "";
+  background: linear-gradient(
+    45deg,
+    #ff0000,
+    #ff7300,
+    #fffb00,
+    #48ff00,
+    #00ffd5,
+    #002bff,
+    #7a00ff,
+    #ff00c8,
+    #ff0000
+  );
+  z-index: var(--randomColors-zIndex);
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  background-size: 400%;
+  filter: blur(5px);
+  -webkit-filter: blur(5px);
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  animation: glowing-button-85 60s linear infinite;
+  transition: opacity 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+@keyframes glowing-button-85 {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 400% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}
+
 .slider {
   display: flex;
   flex-direction: column;
@@ -104,7 +157,7 @@ body {
 .slider .slider-text {
   align-self: center;
   font-size: 2rem;
-  color: #f26a4b;
+  color: #bf3939;
 }
 
 .slider .size-slider {
@@ -140,10 +193,4 @@ body {
   background: #bf3939;
   box-shadow: 1px 1px 1px black, 0px 0px 1px black;
   cursor: pointer;
-}
-
-.canvas {
-  flex-shrink: 0;
-  width: 500px;
-  height: 500px;
 }
