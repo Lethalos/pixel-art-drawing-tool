@@ -198,9 +198,15 @@ body {
   cursor: pointer;
 }
 
+.canvas-section {
+  width: 600px;
+}
+
 .canvas-section .mode-text-bg {
   background-color: #1e1e26;
   padding: 1rem 0;
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
 }
 
 .canvas-section .mode-text {
@@ -229,5 +235,15 @@ body {
   100% {
     opacity: 1;
     transform: translateY(0%);
+  }
+}
+
+@media screen and (max-width: 850px) {
+  .container {
+    flex-direction: column-reverse;
+  }
+
+  .container .canvas-section {
+    align-self: center;
   }
 }
