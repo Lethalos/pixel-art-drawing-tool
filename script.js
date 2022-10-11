@@ -77,23 +77,25 @@ drawCanvas(DEFAULT_SIZE);
 
 const fillColorPallette = () => {
   const colorsDiv = document.querySelectorAll(".color");
-  const currentColor = document.querySelector(".current-color");
-  currentColor.style.backgroundColor = currentPenColor;
+  const currentColorDiv = document.querySelector(".current-color");
+  currentColorDiv.style.backgroundColor = currentPenColor;
 
   colorsDiv.forEach((div) => {
     const color = div.getAttribute("data-color");
     div.style.backgroundColor = color;
     div.addEventListener("click", () => {
-      console.log(color);
+      if (randomColorMode == true) {
+        toggleRandomColorAnim();
+      }
       selectedPenColor = color;
-      currentColor.style.backgroundColor = selectedPenColor;
+      currentColorDiv.style.backgroundColor = selectedPenColor;
     });
   });
 };
 
 fillColorPallette();
 
-randomColors.addEventListener("click", () => {
+const toggleRandomColorAnim = (event) => {
   randomColorMode = !randomColorMode;
   if (randomColorMode) {
     document
@@ -104,7 +106,9 @@ randomColors.addEventListener("click", () => {
       .querySelector(":root")
       .style.setProperty("--randomColors-zIndex", -1);
   }
-});
+};
+
+randomColors.addEventListener("click", toggleRandomColorAnim);
 
 dragMode.addEventListener("click", () => {
   if (currentMode == DEFAULT_MODE) {
