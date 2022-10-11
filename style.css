@@ -24,7 +24,7 @@ body {
 /* Navbar */
 .navbar {
   background-color: #1e1e26;
-  color: #fff;
+  color: lavender;
   padding: 1rem 0;
   font-size: 1.5rem;
 
@@ -42,6 +42,7 @@ body {
 
   display: flex;
   justify-content: space-between;
+
   gap: 2rem;
 }
 
@@ -148,6 +149,22 @@ body {
   }
 }
 
+.color-pallette {
+  align-self: center;
+  width: 200px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+}
+
+.color-pallette div {
+  width: 2rem;
+  height: 2rem;
+  border: 2px solid black;
+  border-radius: 0.5rem;
+}
+
 .slider {
   display: flex;
   flex-direction: column;
@@ -205,6 +222,7 @@ body {
 .canvas-section .mode-text-bg {
   background-color: #1e1e26;
   padding: 1rem 0;
+  border: 1px solid black;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }

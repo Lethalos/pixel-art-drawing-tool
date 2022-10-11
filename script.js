@@ -74,6 +74,18 @@ const drawCanvas = (size) => {
 
 drawCanvas(DEFAULT_SIZE);
 
+const fillColorPallette = () => {
+  const colorsDiv = document.querySelectorAll(".color");
+  console.log(colorsDiv);
+  colorsDiv.forEach((div) => {
+    const color = div.getAttribute("data-color");
+    console.log(color);
+    div.style.backgroundColor = color;
+  });
+};
+
+fillColorPallette();
+
 randomColors.addEventListener("click", () => {
   randomColorMode = !randomColorMode;
   if (randomColorMode) {
