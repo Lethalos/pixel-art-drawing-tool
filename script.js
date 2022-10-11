@@ -4,6 +4,7 @@ const DEFAULT_PEN_COLOR = "black";
 const DEFAULT_MODE = "mouseenter";
 let currentSize = DEFAULT_SIZE;
 let currentPenColor = DEFAULT_PEN_COLOR;
+let selectedPenColor = DEFAULT_PEN_COLOR;
 let currentMode = DEFAULT_MODE;
 let randomColorMode = false;
 
@@ -45,7 +46,7 @@ const setPixelColor = (event) => {
   if (randomColorMode == true) {
     currentPenColor = getRandomColor();
   } else {
-    currentPenColor = DEFAULT_PEN_COLOR;
+    currentPenColor = selectedPenColor;
   }
   event.target.style.backgroundColor = currentPenColor;
 };
@@ -76,11 +77,17 @@ drawCanvas(DEFAULT_SIZE);
 
 const fillColorPallette = () => {
   const colorsDiv = document.querySelectorAll(".color");
-  console.log(colorsDiv);
+  const currentColor = document.querySelector(".current-color");
+  currentColor.style.backgroundColor = currentPenColor;
+
   colorsDiv.forEach((div) => {
     const color = div.getAttribute("data-color");
-    console.log(color);
     div.style.backgroundColor = color;
+    div.addEventListener("click", () => {
+      console.log(color);
+      selectedPenColor = color;
+      currentColor.style.backgroundColor = selectedPenColor;
+    });
   });
 };
 
