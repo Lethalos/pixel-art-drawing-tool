@@ -124,10 +124,6 @@ clearBtn.addEventListener("click", () => {
 });
 
 defaultBtn.addEventListener("click", () => {
-  if (currentSize == DEFAULT_SIZE && currentMode == DEFAULT_MODE) {
-    return;
-  }
-
   currentMode = DEFAULT_MODE;
   modeText.innerText = "Drag Mode active";
   playModeTextAnim();
