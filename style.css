@@ -85,6 +85,10 @@ body {
   z-index: -1;
 }
 
+.settings button:hover {
+  outline: 0;
+}
+
 .settings button:hover:after {
   transform: translate(0, 0);
 }
@@ -92,10 +96,6 @@ body {
 .settings button:active {
   background-color: #fff;
   color: #d99484;
-  outline: 0;
-}
-
-.settings button:hover {
   outline: 0;
 }
 
@@ -161,8 +161,19 @@ body {
 .color-pallette div {
   width: 32px;
   height: 32px;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 0.5rem;
+  transition: border 0.2s;
+}
+
+.color-pallette div:hover {
+  cursor: pointer;
+  border: 2px solid white;
+  box-shadow: 0 0 5px white;
+}
+
+.color-pallette div:active {
+  border: 2px solid black;
 }
 
 .color-info {
@@ -185,7 +196,7 @@ body {
   display: flex;
   width: 50px;
   height: 50px;
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 12px;
 }
 
@@ -209,7 +220,7 @@ body {
   height: calc(100%);
   animation: glowing-button-85 60s linear infinite;
   transition: opacity 0.3s ease-in-out;
-  border-radius: 10px;
+  border-radius: 11px;
 }
 
 .slider {
@@ -303,7 +314,7 @@ body {
   }
 }
 
-@media screen and (max-width: 850px) {
+@media screen and (max-width: 992px) {
   .container {
     flex-direction: column-reverse;
   }
