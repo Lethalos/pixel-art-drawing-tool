@@ -8,6 +8,18 @@ let selectedPenColor = DEFAULT_PEN_COLOR;
 let currentMode = DEFAULT_MODE;
 let randomColorMode = false;
 
+let isDraggable = false;
+window.addEventListener("mousedown", (event) => {
+  isDraggable = true;
+  if (event.target.className == "pixel" && currentMode == DEFAULT_MODE) {
+    setPixelColor(event);
+  }
+});
+
+window.addEventListener("mouseup", () => {
+  isDraggable = false;
+});
+
 const canvas = document.querySelector(".canvas");
 canvas.style.height = `${CANVAS_PIXEL}px`;
 canvas.style.width = `${CANVAS_PIXEL}px`;
@@ -43,11 +55,16 @@ const getRandomColor = () => {
 };
 
 const setPixelColor = (event) => {
+  if (!isDraggable && currentMode == DEFAULT_MODE) {
+    return;
+  }
+
   if (randomColorMode == true) {
     currentPenColor = getRandomColor();
   } else {
     currentPenColor = selectedPenColor;
   }
+
   event.target.style.backgroundColor = currentPenColor;
 };
 
