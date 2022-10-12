@@ -1,7 +1,7 @@
 const CANVAS_PIXEL = 600;
 const DEFAULT_SIZE = 16;
 const DEFAULT_PEN_COLOR = "black";
-const DEFAULT_MODE = "mouseenter";
+const DEFAULT_MODE = "pointerenter";
 let currentSize = DEFAULT_SIZE;
 let currentPenColor = DEFAULT_PEN_COLOR;
 let selectedPenColor = DEFAULT_PEN_COLOR;
@@ -9,21 +9,11 @@ let currentMode = DEFAULT_MODE;
 let randomColorMode = false;
 
 let isDraggable = false;
-window.addEventListener("mousedown", (event) => {
-  isDraggable = true;
-  if (event.target.className == "pixel" && currentMode == DEFAULT_MODE) {
-    setPixelColor(event);
-  }
-});
 window.addEventListener("pointerdown", (event) => {
   isDraggable = true;
   if (event.target.className == "pixel" && currentMode == DEFAULT_MODE) {
     setPixelColor(event);
   }
-});
-
-window.addEventListener("mouseup", () => {
-  isDraggable = false;
 });
 window.addEventListener("pointerup", () => {
   isDraggable = false;
@@ -91,10 +81,8 @@ const drawCanvas = (size) => {
     pixel.className = "pixel";
     pixel.style.backgroundColor = "white";
     pixel.style.border = "1px solid black";
+    pixel.style.touchAction = "none";
     pixel.addEventListener(currentMode, setPixelColor);
-    if (currentMode == DEFAULT_MODE) {
-      pixel.addEventListener("pointerenter", setPixelColor);
-    }
     canvas.appendChild(pixel);
   }
 
