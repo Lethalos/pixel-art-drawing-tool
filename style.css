@@ -66,6 +66,7 @@ body {
   cursor: pointer;
   touch-action: manipulation;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .settings button:after {
@@ -95,11 +96,6 @@ body {
   background-color: #fff;
   color: #d99484;
   outline: 0;
-}
-
-.settings button:focus {
-  background-color: #d99484;
-  color: #fff;
 }
 
 .settings .random-colors .text {
