@@ -98,7 +98,8 @@ body {
 }
 
 .settings button:focus {
-  outline: 0;
+  background-color: #d99484;
+  color: #fff;
 }
 
 .settings .random-colors .text {
