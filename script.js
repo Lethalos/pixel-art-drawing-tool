@@ -2,6 +2,7 @@ const CANVAS_PIXEL = 600;
 const DEFAULT_SIZE = 16;
 const DEFAULT_PEN_COLOR = "black";
 const DEFAULT_MODE = "mouseenter";
+const DEFAULT_MODE_MOBILE = "";
 let currentSize = DEFAULT_SIZE;
 let currentPenColor = DEFAULT_PEN_COLOR;
 let selectedPenColor = DEFAULT_PEN_COLOR;
@@ -15,9 +16,20 @@ window.addEventListener("mousedown", (event) => {
     setPixelColor(event);
   }
 });
+window.addEventListener("touchstart", (event) => {
+  isDraggable = true;
+  if (event.target.className == "pixel" && currentMode == DEFAULT_MODE) {
+    setPixelColor(event);
+  }
+  console.log(isDraggable);
+});
 
 window.addEventListener("mouseup", () => {
   isDraggable = false;
+});
+window.addEventListener("touchend", () => {
+  isDraggable = false;
+  console.log(isDraggable);
 });
 
 const canvas = document.querySelector(".canvas");
@@ -83,6 +95,9 @@ const drawCanvas = (size) => {
     pixel.style.backgroundColor = "white";
     pixel.style.border = "1px solid black";
     pixel.addEventListener(currentMode, setPixelColor);
+    if (currentMode == DEFAULT_MODE) {
+      pixel.addEventListener("touchmove", setPixelColor);
+    }
     canvas.appendChild(pixel);
   }
 
