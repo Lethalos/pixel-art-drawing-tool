@@ -2,7 +2,7 @@
 Colors
 #e7dbd8;
 #BF3939
-#D99484
+lavender
 #F26A4B not used
 #1E1E26
 */
@@ -18,13 +18,13 @@ Colors
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  background-color: #e7dbd8;
+  background-color: lightgoldenrodyellow;
 }
 
 /* Navbar */
 .navbar {
-  background-color: #1e1e26;
-  color: lavender;
+  background-color: lightskyblue;
+  color: #fff;
   padding: 1rem 0;
   font-size: 1.5rem;
 
@@ -32,7 +32,7 @@ body {
   justify-content: center;
 }
 
-/* Canvas */
+/* CANVAS */
 .container {
   max-width: 1100px;
   margin: 0 auto;
@@ -44,6 +44,7 @@ body {
   gap: 2rem;
 }
 
+/* Settings */
 .settings {
   display: flex;
   flex-direction: column;
@@ -51,10 +52,11 @@ body {
 }
 
 .settings button {
-  background-color: #d99484;
-  color: #fff;
+  background-color: lavender;
+  color: #6c6caf;
   border: 2px solid #1e1e26;
   font-size: 1.5rem;
+  font-weight: bold;
   border-radius: 8px;
   box-sizing: border-box;
   display: flex;
@@ -93,19 +95,22 @@ body {
 }
 
 .settings button:active {
-  background-color: #fff;
-  color: #d99484;
+  background-color: #6c6caf;
+  color: lavender;
   outline: 0;
+}
+
+.settings .random-colors {
+  color: #333;
 }
 
 .settings .random-colors .text {
   z-index: 1;
-  font-weight: bold;
 }
 
 .settings .random-colors:active {
-  background-color: #fff;
-  color: #1e1e26;
+  background-color: #6c6caf;
+  color: #fff;
 }
 
 .settings .random-colors:before {
@@ -148,6 +153,56 @@ body {
   }
 }
 
+.slider {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.slider .slider-text {
+  align-self: center;
+  font-size: 2rem;
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 1rem;
+  background-color: lightskyblue;
+}
+
+.slider .size-slider {
+  appearance: none;
+  height: 25px;
+  background-color: lightskyblue;
+  outline: none;
+  border-radius: 1rem;
+  opacity: 0.7;
+  transition: 0.2s;
+}
+
+.slider .size-slider:hover {
+  opacity: 1;
+}
+
+.slider .size-slider::-webkit-slider-thumb {
+  appearance: none;
+  border: 1px solid black;
+  width: 15px;
+  height: 25px;
+  border-radius: 3px;
+  background: steelblue;
+  box-shadow: 1px 1px 1px black, 0px 0px 1px black;
+  cursor: pointer;
+}
+
+.slider .size-slider::-moz-range-thumb {
+  border: 1px solid black;
+  width: 15px;
+  height: 25px;
+  border-radius: 3px;
+  background: steelblue;
+  box-shadow: 1px 1px 1px black, 0px 0px 1px black;
+  cursor: pointer;
+}
+
 .color-pallette {
   align-self: center;
   width: 200px;
@@ -162,7 +217,6 @@ body {
   height: 32px;
   box-shadow: 0 0 3px black;
   border-radius: 0.5rem;
-  transition: border 0.2s;
 }
 
 .color-pallette div:hover {
@@ -183,7 +237,7 @@ body {
 }
 
 .color-info .current-color-text {
-  background-color: #d99484;
+  background-color: lightskyblue;
   color: #fff;
   padding: 0.5rem 1.5rem;
   font-size: 1.5rem;
@@ -224,70 +278,16 @@ body {
   border-radius: 10px;
 }
 
-.slider {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.slider .slider-text {
-  align-self: center;
-  font-size: 2rem;
-  color: #fff;
-  padding: 0.5rem;
-  border-radius: 1rem;
-  background-color: #d99484;
-}
-
-.slider .size-slider {
-  appearance: none;
-  height: 25px;
-  background-color: #d99484;
-  outline: none;
-  border-radius: 1rem;
-  opacity: 0.7;
-  transition: 0.2s;
-}
-
-.slider .size-slider:hover {
-  opacity: 1;
-}
-
-.slider .size-slider::-webkit-slider-thumb {
-  appearance: none;
-  border: 1px solid black;
-  width: 15px;
-  height: 25px;
-  border-radius: 3px;
-  background: #bf3939;
-  box-shadow: 1px 1px 1px black, 0px 0px 1px black;
-  cursor: pointer;
-}
-
-.slider .size-slider::-moz-range-thumb {
-  border: 1px solid black;
-  width: 15px;
-  height: 25px;
-  border-radius: 3px;
-  background: #bf3939;
-  box-shadow: 1px 1px 1px black, 0px 0px 1px black;
-  cursor: pointer;
-}
-
-.canvas-section {
-  width: 600px;
-}
-
 .canvas-section .mode-text-bg {
-  background-color: #1e1e26;
+  width: 600px;
+  background-color: #6c6caf;
   padding: 1rem 0;
-  border: 1px solid black;
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
 }
 
 .canvas-section .mode-text {
-  color: #fff;
+  color: lavender;
   font-size: 2rem;
   text-align: center;
   font-weight: bold;
@@ -296,6 +296,9 @@ body {
 
 .canvas {
   user-select: none;
+  touch-action: none;
+  cursor: pointer;
+  box-shadow: 0 0 30px #6c6caf;
 }
 
 .mode-text-anim {
@@ -318,6 +321,23 @@ body {
     opacity: 1;
     transform: translateY(0%);
   }
+}
+
+footer {
+  padding: 1.5rem 0;
+  font-size: 1.5rem;
+  text-align: center;
+  background-color: lavender;
+  color: #6c6caf;
+}
+
+footer a {
+  font-size: 2rem;
+  margin-left: 0.5rem;
+}
+
+footer a:hover {
+  color: lightskyblue;
 }
 
 @media screen and (max-width: 992px) {

@@ -1,17 +1,23 @@
 const CANVAS_PIXEL = 600;
 const DEFAULT_SIZE = 16;
 const DEFAULT_PEN_COLOR = "black";
-const DEFAULT_MODE = "pointerenter";
+const DRAG_MODE = {
+  event: "pointerenter",
+  text: "Drag Mode Active",
+};
+const CLICK_MODE = {
+  event: "pointerdown",
+  text: "Click Mode Active",
+};
 let currentSize = DEFAULT_SIZE;
 let currentPenColor = DEFAULT_PEN_COLOR;
 let selectedPenColor = DEFAULT_PEN_COLOR;
-let currentMode = DEFAULT_MODE;
+let currentMode = DRAG_MODE.event;
 let randomColorMode = false;
-
 let isDraggable = false;
 window.addEventListener("pointerdown", (event) => {
   isDraggable = true;
-  if (event.target.className == "pixel" && currentMode == DEFAULT_MODE) {
+  if (event.target.className == "pixel" && currentMode == DRAG_MODE.event) {
     setPixelColor(event);
   }
 });
@@ -19,27 +25,29 @@ window.addEventListener("pointerup", () => {
   isDraggable = false;
 });
 
+//DOM Elements
 const canvas = document.querySelector(".canvas");
+const sizeSlider = document.querySelector(".size-slider");
+const sliderText = document.querySelector(".slider-text");
+const randomColorsBtn = document.querySelector(".random-colors");
+const dragModeBtn = document.querySelector(".drag-mode");
+const clickModeBtn = document.querySelector(".click-mode");
+const clearBtn = document.querySelector(".clear-btn");
+const defaultBtn = document.querySelector(".default-btn");
+const modeText = document.querySelector(".mode-text");
+
 canvas.style.height = `${CANVAS_PIXEL}px`;
 canvas.style.width = `${CANVAS_PIXEL}px`;
 
-const sizeSlider = document.querySelector(".size-slider");
-const sliderText = document.querySelector(".slider-text");
 sizeSlider.min = 1;
 sizeSlider.max = 64;
 sizeSlider.addEventListener("change", () => {
   drawCanvas(sizeSlider.value);
 });
 
-const randomColors = document.querySelector(".random-colors");
-const dragMode = document.querySelector(".drag-mode");
-const clickMode = document.querySelector(".click-mode");
-const clearBtn = document.querySelector(".clear-btn");
-const defaultBtn = document.querySelector(".default-btn");
+modeText.innerText = DRAG_MODE.text;
 
-const modeText = document.querySelector(".mode-text");
-modeText.innerText = "Drag Mode active";
-
+//CANVAS
 const deletePixels = () => {
   const pixels = document.querySelectorAll(".pixel");
   pixels.forEach((pixel) => pixel.remove());
@@ -54,9 +62,11 @@ const getRandomColor = () => {
 };
 
 const setPixelColor = (event) => {
-  if (!isDraggable && currentMode == DEFAULT_MODE) {
+  if (!isDraggable && currentMode == DRAG_MODE.event) {
     return;
   }
+
+  event.target.releasePointerCapture(event.pointerId);
 
   if (randomColorMode == true) {
     currentPenColor = getRandomColor();
@@ -80,8 +90,7 @@ const drawCanvas = (size) => {
     let pixel = document.createElement("div");
     pixel.className = "pixel";
     pixel.style.backgroundColor = "white";
-    pixel.style.border = "1px solid black";
-    pixel.style.touchAction = "none";
+    pixel.style.border = "1px solid #a0a0a0";
     pixel.addEventListener(currentMode, setPixelColor);
     canvas.appendChild(pixel);
   }
@@ -90,8 +99,7 @@ const drawCanvas = (size) => {
   canvas.style.gridTemplateColumns = `repeat(${size}, ${pixelWidth}px)`;
 };
 
-drawCanvas(DEFAULT_SIZE);
-
+//SETTINGS
 const fillColorPallette = () => {
   const colorsDiv = document.querySelectorAll(".color");
   const currentColorDiv = document.querySelector(".current-color");
@@ -110,8 +118,7 @@ const fillColorPallette = () => {
   });
 };
 
-fillColorPallette();
-
+//BUTTONS
 const toggleRandomColorAnim = (event) => {
   randomColorMode = !randomColorMode;
   if (randomColorMode) {
@@ -125,37 +132,37 @@ const toggleRandomColorAnim = (event) => {
   }
 };
 
-randomColors.addEventListener("click", toggleRandomColorAnim);
+randomColorsBtn.addEventListener("click", toggleRandomColorAnim);
 
-dragMode.addEventListener("click", () => {
-  if (currentMode == DEFAULT_MODE) {
+dragModeBtn.addEventListener("click", () => {
+  if (currentMode == DRAG_MODE.event) {
     return;
   }
 
   const pixels = document.querySelectorAll(".pixel");
   pixels.forEach((pixel) => {
     pixel.removeEventListener(currentMode, setPixelColor);
-    pixel.addEventListener(DEFAULT_MODE, setPixelColor);
+    pixel.addEventListener(DRAG_MODE.event, setPixelColor);
   });
 
-  currentMode = DEFAULT_MODE;
-  modeText.innerText = "Drag Mode active";
+  currentMode = DRAG_MODE.event;
+  modeText.innerText = DRAG_MODE.text;
   playModeTextAnim();
 });
 
-clickMode.addEventListener("click", () => {
-  if (currentMode == "click") {
+clickModeBtn.addEventListener("click", () => {
+  if (currentMode == CLICK_MODE.event) {
     return;
   }
 
   const pixels = document.querySelectorAll(".pixel");
   pixels.forEach((pixel) => {
     pixel.removeEventListener(currentMode, setPixelColor);
-    pixel.addEventListener("click", setPixelColor);
+    pixel.addEventListener(CLICK_MODE.event, setPixelColor);
   });
 
-  currentMode = "click";
-  modeText.innerText = "Click Mode active";
+  currentMode = CLICK_MODE.event;
+  modeText.innerText = CLICK_MODE.text;
   playModeTextAnim();
 });
 
@@ -164,8 +171,8 @@ clearBtn.addEventListener("click", () => {
 });
 
 defaultBtn.addEventListener("click", () => {
-  currentMode = DEFAULT_MODE;
-  modeText.innerText = "Drag Mode active";
+  currentMode = DRAG_MODE.event;
+  modeText.innerText = DRAG_MODE.text;
   playModeTextAnim();
 
   drawCanvas(DEFAULT_SIZE);
@@ -177,3 +184,6 @@ const playModeTextAnim = () => {
     modeText.classList.remove("mode-text-anim");
   }, 500);
 };
+
+fillColorPallette();
+drawCanvas(DEFAULT_SIZE);
