@@ -203,7 +203,7 @@ body {
   cursor: pointer;
 }
 
-.color-pallette {
+.color-palette {
   align-self: center;
   width: 200px;
   display: flex;
@@ -212,20 +212,20 @@ body {
   gap: 5px;
 }
 
-.color-pallette div {
+.color-palette div {
   width: 32px;
   height: 32px;
   box-shadow: 0 0 3px black;
   border-radius: 0.5rem;
 }
 
-.color-pallette div:hover {
+.color-palette div:hover {
   cursor: pointer;
   border: 1px solid #fff;
   box-shadow: 0 0 5px #fff;
 }
 
-.color-pallette div:active {
+.color-palette div:active {
   box-shadow: 0 0 10px black;
 }
 

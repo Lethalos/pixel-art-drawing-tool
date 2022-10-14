@@ -100,7 +100,7 @@ const drawCanvas = (size) => {
 };
 
 //SETTINGS
-const fillColorPallette = () => {
+const fillColorPalette = () => {
   const colorsDiv = document.querySelectorAll(".color");
   const currentColorDiv = document.querySelector(".current-color");
   currentColorDiv.style.backgroundColor = currentPenColor;
@@ -185,5 +185,5 @@ const playModeTextAnim = () => {
   }, 500);
 };
 
-fillColorPallette();
+fillColorPalette();
 drawCanvas(DEFAULT_SIZE);
